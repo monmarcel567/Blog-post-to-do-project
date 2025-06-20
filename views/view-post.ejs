@@ -1,0 +1,23 @@
+<%- include('partials/header', { title: post.title, isAdmin }) %>
+    <section class="post-view">
+        <h2><%= post.title %></h2>
+        <p class="meta">
+            Posted on <%= post.createdAt %>
+            <% if (post.updatedAt) { %>
+                | Updated on <%= post.updatedAt %>
+            <% } %>
+        </p>
+        <div class="post-content">
+            <%= post.content %>
+        </div>
+        <div class="actions">
+            <% if (isAdmin) { %>
+                <a href="/posts/<%= post.id %>/edit" class="btn edit">Edit</a>
+                <form action="/posts/<%= post.id %>/delete" method="POST">
+                    <button type="submit" class="btn delete">Delete</button>
+                </form>
+            <% } %>
+            <a href="/" class="btn home">Back to Home</a>
+        </div>
+    </section>
+<%- include('partials/footer') %>

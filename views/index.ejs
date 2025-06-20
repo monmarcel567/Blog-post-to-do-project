@@ -1,0 +1,23 @@
+<%- include('partials/header', { title: 'Home', isAdmin }) %>
+    <section class="posts-container">
+        <% if (posts.length === 0) { %>
+            <div class="no-posts">
+                <p>No posts yet.</p>
+                <% if (isAdmin) { %>
+                    <a href="/posts/new" class="btn">Create your first post</a>
+                <% } %>
+            </div>
+        <% } else { %>
+            <% posts.forEach(post => { %>
+                <article class="post">
+                    <h2><a href="/posts/<%= post.id %>"><%= post.title %></a></h2>
+                    <p class="meta">Posted on <%= post.createdAt %></p>
+                    <div class="post-preview">
+                        <%= post.content.substring(0, 100) %>...
+                    </div>
+                    <a href="/posts/<%= post.id %>" class="btn read-more">Read More</a>
+                </article>
+            <% }) %>
+        <% } %>
+    </section>
+<%- include('partials/footer') %>
